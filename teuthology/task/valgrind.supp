@@ -1,0 +1,395 @@
+{
+   older boost mersenne twister uses uninitialized memory for randomness
+   Memcheck:Cond
+   ...
+   fun:*Monitor::prepare_new_fingerprint*
+   ...
+}
+{
+   older boost mersenne twister uses uninitialized memory for randomness
+   Memcheck:Value8
+   ...
+   fun:*Monitor::prepare_new_fingerprint*
+   ...
+}
+{
+   apparent TLS leak in eglibc
+   Memcheck:Leak
+   fun:calloc
+   fun:_dl_allocate_tls
+   fun:pthread_create*
+   ...
+}
+{
+   osd: ignore ec plugin loading (FIXME SOMEDAY)
+   Memcheck:Leak
+   ...
+   fun:*ErasureCodePluginRegistry*load*
+   ...
+}
+{
+   osd: ignore ec plugin factory (FIXME SOMEDAY)
+   Memcheck:Leak
+   ...
+   fun:*ErasureCodePluginRegistry*factory*
+   ...
+}
+{
+   tcmalloc: libboost_thread-mt.so.1.53 is linked with tcmalloc
+   Memcheck:Param
+   msync(start)
+   obj:/usr/lib64/libpthread-2.17.so
+   obj:/usr/lib64/libunwind.so.8.0.1
+   obj:/usr/lib64/libunwind.so.8.0.1
+   obj:/usr/lib64/libunwind.so.8.0.1
+   obj:/usr/lib64/libunwind.so.8.0.1
+   ...
+   fun:*tcmalloc*ThreadCache*
+   ...
+   obj:/usr/lib64/libboost_thread-mt.so.1.53.0
+}
+{
+   tcmalloc: msync heap allocation points to uninit bytes (centos 6.5)
+   Memcheck:Param
+   msync(start)
+   obj:/lib64/libpthread-2.12.so
+   obj:/usr/lib64/libunwind.so.8.0.1
+   obj:/usr/lib64/libunwind.so.8.0.1
+   obj:/usr/lib64/libunwind.so.8.0.1
+   obj:/usr/lib64/libunwind.so.8.0.1
+   fun:_ULx86_64_step
+   fun:_Z13GetStackTracePPvii
+   fun:_ZN8tcmalloc8PageHeap8GrowHeapEm
+   fun:_ZN8tcmalloc8PageHeap3NewEm
+}
+{
+   tcmalloc: msync heap allocation points to unaddressible bytes (centos 6.5 #2)
+   Memcheck:Param
+   msync(start)
+   obj:/lib64/libpthread-2.12.so
+   obj:/usr/lib64/libunwind.so.7.0.0
+   fun:_ULx86_64_step
+   fun:_Z13GetStackTracePPvii
+   fun:_ZN8tcmalloc8PageHeap8GrowHeapEm
+   fun:_ZN8tcmalloc8PageHeap3NewEm
+}
+{
+   tcmalloc: msync heap allocation points to uninit bytes (rhel7)
+   Memcheck:Param
+   msync(start)
+   obj:/usr/lib64/libpthread-2.17.so
+   obj:/usr/lib64/libunwind.so.8.0.1
+   obj:/usr/lib64/libunwind.so.8.0.1
+   obj:/usr/lib64/libunwind.so.8.0.1
+   obj:/usr/lib64/libunwind.so.8.0.1
+   fun:_ULx86_64_step
+   fun:_Z13GetStackTracePPvii
+   fun:_ZN8tcmalloc8PageHeap8GrowHeapEm
+   fun:_ZN8tcmalloc8PageHeap3NewEm
+}
+{
+   tcmalloc: msync heap allocation points to uninit bytes (rhel7 #2)
+   Memcheck:Param
+   msync(start)
+   obj:/usr/lib64/libpthread-2.17.so
+   obj:/usr/lib64/libunwind.so.8.0.1
+   obj:/usr/lib64/libunwind.so.8.0.1
+   obj:/usr/lib64/libunwind.so.8.0.1
+   obj:/usr/lib64/libunwind.so.8.0.1
+   fun:_ULx86_64_step
+   obj:/usr/lib64/libtcmalloc.so.4.2.6
+   fun:_Z13GetStackTracePPvii
+   fun:_ZN8tcmalloc8PageHeap8GrowHeapEm
+   fun:_ZN8tcmalloc8PageHeap3NewEm
+}
+{
+   tcmalloc: msync heap allocation points to uninit bytes (wheezy)
+   Memcheck:Param
+   msync(start)
+   obj:/lib/x86_64-linux-gnu/libpthread-2.13.so
+   obj:/usr/lib/libunwind.so.7.0.0
+   fun:_ULx86_64_step
+   fun:_Z13GetStackTracePPvii
+   fun:_ZN8tcmalloc8PageHeap8GrowHeapEm
+   fun:_ZN8tcmalloc8PageHeap3NewEm
+}
+{
+   tcmalloc: msync heap allocation points to uninit bytes (precise)
+   Memcheck:Param
+   msync(start)
+   obj:/lib/x86_64-linux-gnu/libpthread-2.15.so
+   obj:/usr/lib/libunwind.so.7.0.0
+   fun:_ULx86_64_step
+   fun:_Z13GetStackTracePPvii
+   fun:_ZN8tcmalloc8PageHeap8GrowHeapEm
+   fun:_ZN8tcmalloc8PageHeap3NewEm
+   obj:/usr/lib/libtcmalloc.so.0.1.0
+}
+{
+   tcmalloc: msync heap allocation points to uninit bytes (trusty)
+   Memcheck:Param
+   msync(start)
+   obj:/lib/x86_64-linux-gnu/libpthread-2.19.so
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   fun:_ULx86_64_step
+   fun:_Z13GetStackTracePPvii
+   fun:_ZN8tcmalloc8PageHeap8GrowHeapEm
+   fun:_ZN8tcmalloc8PageHeap3NewEm
+}
+{
+   tcmalloc: msync heap allocation points to uninit bytes 2 (trusty)
+   Memcheck:Param
+   msync(start)
+   fun:__msync_nocancel
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   fun:_ULx86_64_step
+   fun:_Z13GetStackTracePPvii
+   fun:_ZN8tcmalloc8PageHeap8GrowHeapEm
+   fun:_ZN8tcmalloc8PageHeap3NewEm
+   fun:_ZN8tcmalloc15CentralFreeList8PopulateEv
+   fun:_ZN8tcmalloc15CentralFreeList18FetchFromSpansSafeEv
+   fun:_ZN8tcmalloc15CentralFreeList11RemoveRangeEPPvS2_i
+}
+{
+   tcmalloc: msync (xenial)
+   Memcheck:Param
+   msync(start)
+   fun:__msync_nocancel
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   obj:*tcmalloc*
+   fun:*GetStackTrace*
+}
+{
+	tcmalloc: string
+	Memcheck:Leak
+	...
+	obj:*tcmalloc*
+	fun:call_init*
+	...
+}
+{
+	ceph global: deliberate onexit leak
+	Memcheck:Leak
+	...
+	fun:*set_flush_on_exit*
+	...
+}
+{
+	libleveldb: ignore all static leveldb leaks
+	Memcheck:Leak
+	...
+	fun:*leveldb*
+	...
+}
+{
+	libleveldb: ignore all dynamic libleveldb leaks
+	Memcheck:Leak
+	...
+	obj:*libleveldb.so*
+	...
+}
+{
+	libcurl: ignore libcurl leaks
+	Memcheck:Leak
+	...
+	fun:*curl_global_init
+}
+{
+	ignore gnutls leaks
+	Memcheck:Leak
+	...
+	fun:gnutls_global_init
+}
+{
+	ignore libfcgi leak; OS_LibShutdown has no callers!
+	Memcheck:Leak
+	...
+	fun:OS_LibInit
+	fun:FCGX_Init
+}
+{
+	ignore libnss3 leaks
+	Memcheck:Leak
+	...
+	obj:*libnss3*
+	...
+}
+{
+        strptime suckage
+        Memcheck:Cond
+        fun:__GI___strncasecmp_l
+        fun:__strptime_internal
+        ...
+}
+{
+        strptime suckage 2
+        Memcheck:Value8
+        fun:__GI___strncasecmp_l
+        fun:__strptime_internal
+        ...
+}
+{
+        strptime suckage 3
+        Memcheck:Addr8
+        fun:__GI___strncasecmp_l
+        fun:__strptime_internal
+        ...
+}
+{
+	inet_ntop does something lame on local stack
+	Memcheck:Value8
+	...
+	fun:inet_ntop
+	...
+}
+{
+	inet_ntop does something lame on local stack
+	Memcheck:Addr8
+	...
+	fun:inet_ntop
+	...
+}
+{
+	dl-lookup.c thing .. Invalid write of size 8
+	Memcheck:Value8
+	fun:do_lookup_x
+	...
+	fun:_dl_lookup_symbol_x
+	...
+}
+{
+	dl-lookup.c thing .. Invalid write of size 8
+	Memcheck:Addr8
+	fun:do_lookup_x
+	...
+	fun:_dl_lookup_symbol_x
+	...
+}
+{
+	weird thing from libc
+	Memcheck:Leak
+	...
+	fun:*sub_I_comparator*
+	fun:__libc_csu_init
+	...
+}
+{
+	libfuse leak
+	Memcheck:Leak
+	...
+	fun:fuse_parse_cmdline
+	...
+}
+{
+	boost thread leaks on exit
+	Memcheck:Leak
+	...
+	fun:*boost*detail*
+	...
+	fun:exit
+}
+{
+	lttng appears to not clean up state
+	Memcheck:Leak
+	...
+	fun:lttng_ust_baddr_statedump_init
+	fun:lttng_ust_init
+	fun:call_init.part.0
+	...
+}
+{
+	fun:PK11_CreateContextBySymKey race
+	Helgrind:Race
+	obj:/usr/*lib*/libfreebl*3.so
+	...
+	obj:/usr/*lib*/libsoftokn3.so
+	...
+	obj:/usr/*lib*/libnss3.so
+	fun:PK11_CreateContextBySymKey
+	...
+}
+{
+	thread init race
+	Helgrind:Race
+	fun:mempcpy
+	fun:_dl_allocate_tls_init
+	...
+	fun:pthread_create@*
+	...
+}
+{
+	thread_local memory is falsely detected (https://svn.boost.org/trac/boost/ticket/3296)
+	Memcheck:Leak
+	...
+	fun:*boost*detail*get_once_per_thread_epoch*
+	fun:*boost*call_once*
+	fun:*boost*detail*get_current_thread_data*
+	...
+}
+{
+	rocksdb thread local singletons
+	Memcheck:Leak
+	...
+	fun:rocksdb::Env::Default()
+	...
+}
+{
+	rocksdb column thread local leaks
+	Memcheck:Leak
+	...
+	fun:rocksdb::ThreadLocalPtr::StaticMeta::SetHandler*
+	fun:rocksdb::ColumnFamilyData::ColumnFamilyData*
+	...
+}
+{
+	rocksdb thread crap
+	Memcheck:Leak
+	...
+	fun:*ThreadLocalPtr*
+	...
+}
+{
+	rocksdb singleton Env leak, blech
+	Memcheck:Leak
+	...
+	fun:CreateThreadStatusUpdater
+	fun:PosixEnv
+	...
+}
+{
+	rocksdb::Env::Default()
+	Memcheck:Leak
+	...
+	fun:*rocksdb*Env*Default*
+	...
+}
+{
+	libstdc++ leak on xenial
+	Memcheck:Leak
+	fun:malloc
+	...
+	fun:call_init.part.0
+	fun:call_init
+	fun:_dl_init
+	...
+}
+{
+	strange leak of std::string memory from md_config_t seen in radosgw
+	Memcheck:Leak
+	...
+	fun:_ZNSs4_Rep9_S_createEmmRKSaIcE
+	fun:_ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag
+	...
+	fun:_ZN11md_config_tC1Ev
+	fun:_ZN11CephContextC1Eji
+	...
+}
