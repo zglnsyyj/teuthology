@@ -174,8 +174,8 @@ def validate_tasks(config):
 
 def get_initial_tasks(lock, config, machine_type):
     init_tasks = [
-        {'internal.check_packages': None},
-        {'internal.buildpackages_prep': None},
+        # {'internal.check_packages': None},
+        # {'internal.buildpackages_prep': None},
     ]
     if 'roles' in config and lock:
         msg = ('You cannot specify targets in a config file when using the ' +
@@ -197,18 +197,18 @@ def get_initial_tasks(lock, config, machine_type):
             {'internal.connect': None},
             {'internal.push_inventory': None},
             {'internal.serialize_remote_roles': None},
-            {'internal.check_conflict': None},
+            # {'internal.check_conflict': None},
         ])
 
     if ('roles' in config and
         not config.get('use_existing_cluster', False)):
         init_tasks.extend([
-            {'internal.check_ceph_data': None},
-            {'internal.vm_setup': None},
+            # {'internal.check_ceph_data': None},
+            # {'internal.vm_setup': None},
         ])
 
-    if 'kernel' in config:
-        init_tasks.append({'kernel': config['kernel']})
+    # if 'kernel' in config:
+    #     init_tasks.append({'kernel': config['kernel']})
 
     if 'roles' in config:
         init_tasks.append({'internal.base': None})
@@ -226,8 +226,8 @@ def get_initial_tasks(lock, config, machine_type):
         init_tasks.extend([
             {'pcp': None},
             {'selinux': None},
-            {'ansible.cephlab': None},
-            {'clock.check': None}
+            # {'ansible.cephlab': None},
+            # {'clock.check': None}
         ])
 
     return init_tasks
