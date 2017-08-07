@@ -225,7 +225,7 @@ def get_initial_tasks(lock, config, machine_type):
     if 'roles' in config:
         init_tasks.extend([
             {'pcp': None},
-            {'selinux': None},
+            # {'selinux': None},
             # {'ansible.cephlab': None},
             # {'clock.check': None}
         ])
