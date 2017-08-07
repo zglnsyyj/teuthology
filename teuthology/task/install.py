@@ -659,48 +659,48 @@ def get_package_list(ctx, config):
     return package_list
 
 
-@contextlib.contextmanager
-def install(ctx, config):
-    """
-    The install task. Installs packages for a given project on all hosts in
-    ctx. May work for projects besides ceph, but may not. Patches welcomed!
+# @contextlib.contextmanager
+# def install(ctx, config):
+#     """
+#     The install task. Installs packages for a given project on all hosts in
+#     ctx. May work for projects besides ceph, but may not. Patches welcomed!
 
-    :param ctx: the argparse.Namespace object
-    :param config: the config dict
-    """
+#     :param ctx: the argparse.Namespace object
+#     :param config: the config dict
+#     """
 
-    project = config.get('project', 'ceph')
+#     project = config.get('project', 'ceph')
 
-    package_list = get_package_list(ctx, config)
-    debs = package_list['deb']
-    rpm = package_list['rpm']
+#     package_list = get_package_list(ctx, config)
+#     debs = package_list['deb']
+#     rpm = package_list['rpm']
 
-    # pull any additional packages out of config
-    extra_pkgs = config.get('extra_packages')
-    log.info('extra packages: {packages}'.format(packages=extra_pkgs))
-    debs += extra_pkgs
-    rpm += extra_pkgs
+#     # pull any additional packages out of config
+#     extra_pkgs = config.get('extra_packages')
+#     log.info('extra packages: {packages}'.format(packages=extra_pkgs))
+#     debs += extra_pkgs
+#     rpm += extra_pkgs
 
-    # When extras is in the config we want to purposely not install ceph.
-    # This is typically used on jobs that use ceph-deploy to install ceph
-    # or when we are testing ceph-deploy directly.  The packages being
-    # installed are needed to properly test ceph as ceph-deploy won't
-    # install these. 'extras' might not be the best name for this.
-    extras = config.get('extras')
-    if extras is not None:
-        debs = ['ceph-test', 'ceph-fuse',
-                'librados2', 'librbd1',
-                'python-ceph']
-        rpm = ['ceph-fuse', 'librbd1', 'librados2', 'ceph-test', 'python-ceph']
-    package_list = dict(deb=debs, rpm=rpm)
-    install_packages(ctx, package_list, config)
-    try:
-        yield
-    finally:
-        remove_packages(ctx, config, package_list)
-        remove_sources(ctx, config)
-        if project == 'ceph':
-            purge_data(ctx)
+#     # When extras is in the config we want to purposely not install ceph.
+#     # This is typically used on jobs that use ceph-deploy to install ceph
+#     # or when we are testing ceph-deploy directly.  The packages being
+#     # installed are needed to properly test ceph as ceph-deploy won't
+#     # install these. 'extras' might not be the best name for this.
+#     extras = config.get('extras')
+#     if extras is not None:
+#         debs = ['ceph-test', 'ceph-fuse',
+#                 'librados2', 'librbd1',
+#                 'python-ceph']
+#         rpm = ['ceph-fuse', 'librbd1', 'librados2', 'ceph-test', 'python-ceph']
+#     package_list = dict(deb=debs, rpm=rpm)
+#     install_packages(ctx, package_list, config)
+#     try:
+#         yield
+#     finally:
+#         remove_packages(ctx, config, package_list)
+#         remove_sources(ctx, config)
+#         if project == 'ceph':
+#             purge_data(ctx)
 
 
 def _upgrade_deb_packages(ctx, config, remote, debs):
@@ -1355,20 +1355,21 @@ def task(ctx, config):
         with contextutil.nested(*nested_tasks):
                 yield
     else:
-        with contextutil.nested(
-            lambda: install(ctx=ctx, config=dict(
-                branch=config.get('branch'),
-                tag=config.get('tag'),
-                sha1=config.get('sha1'),
-                debuginfo=config.get('debuginfo'),
-                flavor=flavor,
-                extra_packages=config.get('extra_packages', []),
-                exclude_packages=config.get('exclude_packages', []),
-                extras=config.get('extras', None),
-                wait_for_package=config.get('wait_for_package', False),
-                project=project,
-                packages=config.get('packages', dict()),
-            )),
-            lambda: ship_utilities(ctx=ctx, config=None),
-        ):
-            yield
+        yield
+        # with contextutil.nested(
+        #     lambda: install(ctx=ctx, config=dict(
+        #         branch=config.get('branch'),
+        #         tag=config.get('tag'),
+        #         sha1=config.get('sha1'),
+        #         debuginfo=config.get('debuginfo'),
+        #         flavor=flavor,
+        #         extra_packages=config.get('extra_packages', []),
+        #         exclude_packages=config.get('exclude_packages', []),
+        #         extras=config.get('extras', None),
+        #         wait_for_package=config.get('wait_for_package', False),
+        #         project=project,
+        #         packages=config.get('packages', dict()),
+        #     )),
+        #     lambda: ship_utilities(ctx=ctx, config=None),
+        # ):
+        #     yield
