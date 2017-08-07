@@ -1,0 +1,16 @@
+check-locks: false
+use_existing_cluster: true
+
+roles:
+- [mon.a, osd.0, client.0]
+
+tasks:
+- install:
+
+tasks:
+- exec:
+    client.0:
+      - sudo ceph osd tree
+
+targets:
+  ubuntu@plana003.lenovo-ceph.com: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzlP4mliUpS9IJMmdAlDv3fVLZ4SnUcRQgezdPFHW+1UhtHcOJNAfmTxOUl6+gzqMLKpSZI1NezsMq1YCQG30uREm0yQC+rIHl5V/ONvARXLR9ujzKzUBW3tH7CF5/L4B
