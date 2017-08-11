@@ -11,7 +11,7 @@ tasks:
 - workunit:
     clients:
       client.0:
-        - rbd/test_librbd.sh
+        - rbd/image_read.sh
 
 targets:
   ubuntu@plana003.lenovo-ceph.com: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzlP4mliUpS9IJMmdAlDv3fVLZ4SnUcRQgezdPFHW+1UhtHcOJNAfmTxOUl6+gzqMLKpSZI1NezsMq1YCQG30uREm0yQC+rIHl5V/ONvARXLR9ujzKzUBW3tH7CF5/L4B6MPAwj5qOj/XBRDdIAXbVOITSNm/fj8AsHfPR0EYkSRsH0h8MnsTQGRNg5zD3zO/HHAX4eebuA5/S3dMyZHH6byXuKDpRuOBRn+RVpjUFE1gi7cfHA6Nlo0DyNJ+NZQcPTI5dZIZpcYtZwmgMxsg8n5N1vWv387bzGTVNy3u5lnqnWiS/o3qu16+qEELRLBGygcf8OOmcdFL4tSuSOjNl
