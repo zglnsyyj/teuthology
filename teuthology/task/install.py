@@ -802,9 +802,10 @@ def rh_uninstall(ctx, config):
     :param ctx: the argparse.Namespace object
     :param config: the config dict
     """
-    with parallel() as p:
-        for remote in ctx.cluster.remotes.iterkeys():
-            p.spawn(rh_uninstall_pkgs, ctx, remote)
+    pass
+    # with parallel() as p:
+    #     for remote in ctx.cluster.remotes.iterkeys():
+    #         p.spawn(rh_uninstall_pkgs, ctx, remote)
 
 
 def rh_install_pkgs(ctx, remote, installed_version):
