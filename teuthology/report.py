@@ -426,8 +426,6 @@ def push_job_info(run_name, job_id, job_info, base_uri=None):
                      ResultsReporter will ask teuthology.config.
     """
     reporter = ResultsReporter()
-    log = init_logging()
-    log.debug("yujiang " + reporter.base_uri)
     if not reporter.base_uri:
         return
     reporter.report_job(run_name, job_id, job_info)
