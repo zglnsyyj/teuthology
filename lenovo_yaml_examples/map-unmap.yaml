@@ -1,0 +1,16 @@
+check-locks: false
+use_existing_cluster: true
+
+roles:
+- [mon.a, osd.0, client.0]
+
+tasks:
+- install:
+
+tasks:
+- exec:
+    client.0:
+        - sudo /home/ubuntu/ceph-10.2.7/qa/workunits/rbd/map-unmap.sh
+
+targets:
+    ubuntu@plana006.lenovo.com: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCi9riDqGdUpCOd9pajdmVEWncYtvt5nB9FUECkodBjhGtqEjuc0aQrETptmCNlhcMK0/s6KPTgGe+JiD31wO4GZbW7hdOSDLf7DTRtwQzXplgqcMJH/FWY5NccG5ZLzsDuNaPJE36NNFFmL4/Dj/IfjWfLsAGOErfVQoZl1OgMnYf6SdUnHsH/ObFTlCJ4sJWWsGseBJyVT4OPA1P7CKaSnQsAzPGdgNLUOQmymIuA7+dHFGM3RzUqie10IMypcd4j+Msaa1aqQAHT21oh0NsjW+bDs950t+dCFOXRmKpFQCPeIXB5QlNAqxsrigDycV35bGWtudVOMeDiWY6REWsv
